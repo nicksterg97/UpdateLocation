@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 
 import location.entities.User;
+import location.entities.UserLocation;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -16,16 +17,16 @@ public class UserProcessor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserProcessor.class);
 
-    private List<Consumer<User>> listeners = new CopyOnWriteArrayList<>();
+    private List<Consumer<UserLocation>> listeners = new CopyOnWriteArrayList<>();
 
-    public void register(Consumer<User> listener) {
+    public void register(Consumer<UserLocation> listener) {
         listeners.add(listener);
         LOGGER.info("Added a listener, for a total of {} listener{}", listeners.size(), listeners.size() > 1 ? "s" : "");
     }
 
 
-    public void process(User user) {
-    	System.out.println("Processing: "+user);
-        listeners.forEach(c -> c.accept(user));
+    public void process(UserLocation userLocation) {
+    	System.out.println("Processing: "+userLocation);
+        listeners.forEach(c -> c.accept(userLocation));
     }
 }

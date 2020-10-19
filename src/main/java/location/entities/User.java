@@ -23,12 +23,6 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="user_id")
 	private int user_id;
-	
-	@Column(name="lat")
-	private String lat;
-	
-	@Column(name="lon")
-	private String lon;
 
 	@Column(name="name")
 	private String name;
@@ -104,65 +98,58 @@ public class User {
 	@Column(name="municipality")
 	private String municipality;
 	
+	@Column(name="lat")
+	private Double lat;
+	
+	@Column(name="lon")
+	private Double lon;
+	
+	
+	
 	@Column(name="age")
 	private String age;
 	
 	@Column(name="gender")
 	private String gender;
 	
-	public String getLat() {
-		return lat;
-	}
-
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-
-	public String getLon() {
-		return lon;
-	}
-
-	public void setLon(String lon) {
-		this.lon = lon;
-	}
-
-
-
-
-	public String getDepartment() {
-		return department;
-	}
-
-
-
-
-	public void setDepartment(String department) {
-		this.department = department;
-	}
-
-
-
-
-	public String getMunicipality() {
-		return municipality;
-	}
-
-
-
-
-	public void setMunicipality(String municipality) {
-		this.municipality = municipality;
-	}
-
-
-
+	
+	@Column(name="clinic")
+	private String clinic;
+	
+	@Column(name="cluster_municipality")
+	private String clusterMunicipality;
+	
+	
 
 	public User() {
 		super();
 	}
 	
+
 	
 	
+	
+
+
+	public String getClusterMunicipality() {
+		return clusterMunicipality;
+	}
+
+
+
+
+
+
+
+	public void setClusterMunicipality(String clusterMunicipality) {
+		this.clusterMunicipality = clusterMunicipality;
+	}
+
+
+
+
+
+
 
 	public String getAge() {
 		return age;
@@ -301,7 +288,7 @@ public class User {
 
 	public User(int user_id, String name, String surname, String email, String password, String city, String phone,
 			String roles, String userName, Integer isActive, String registrationDate, String firebaseToken,
-			String bloodType, String disease, String alergies, String medicines, int counterContacts,int counterIncidents, int counterDirections,String country,String photo,String phoneNumber,String periphery,String age,String gender) {
+			String bloodType, String disease, String alergies, String medicines, int counterContacts,int counterIncidents, int counterDirections,String country,String photo,String phoneNumber,String periphery,String age,String gender,String municipality,String department,String clinic ) {
 		super();
 		this.user_id = user_id;
 		this.name = name;
@@ -328,9 +315,33 @@ public class User {
 		this.periphery=periphery;
 		this.age=age;
 		this.gender=gender;
+		this.municipality=municipality;
+		this.department=department;
+		this.clinic=clinic;
 	}
 	
 	
+	
+
+	public String getClinic() {
+		return clinic;
+	}
+
+
+
+
+
+
+
+	public void setClinic(String clinic) {
+		this.clinic = clinic;
+	}
+
+
+
+
+
+
 
 	public int getCounterContacts() {
 		return counterContacts;
@@ -439,6 +450,62 @@ public class User {
 
 
 	
+
+
+
+	public String getDepartment() {
+		return department;
+	}
+
+
+
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+
+
+
+	public String getMunicipality() {
+		return municipality;
+	}
+
+
+
+
+	public void setMunicipality(String municipality) {
+		this.municipality = municipality;
+	}
+
+
+
+
+	public Double getLat() {
+		return lat;
+	}
+
+
+
+
+	public void setLat(Double lat) {
+		this.lat = lat;
+	}
+
+
+
+
+	public Double getLon() {
+		return lon;
+	}
+
+
+
+
+	public void setLon(Double lon) {
+		this.lon = lon;
+	}
+
 
 
 

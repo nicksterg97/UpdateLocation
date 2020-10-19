@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import location.entities.ApiResponse;
 import location.entities.AuthenticationRequest;
 import location.entities.AuthenticationResponse;
+import location.entities.Event;
 import location.entities.User;
 import location.entities.UserLocation;
 import location.entities.service.MyUserDetailsService;
 import location.jwtfilter.JwtUtil;
+import location.proccessors.NotificationProcessor;
 import location.proccessors.UserProcessor;
 import location.repositories.UserRepository;
 import reactor.core.publisher.Flux;
@@ -41,6 +43,9 @@ public class RestApiController {
 
 	@Autowired
 	private UserProcessor userProcessor;
+	
+	@Autowired
+	private NotificationProcessor notificationProcessor;
 
 	@Autowired
 	private MyUserDetailsService userDetailsService;
@@ -73,21 +78,40 @@ public class RestApiController {
 
 		// User from user_id
 		User user = userFromRepo.get();
-
-		// Task Here
-
-		/*
-		 * asdjkmjkj
-		 * userProcessor.process(user);
-		 * dkfdc
-		 */
+		
+		userRepo.saveAndFlush(user);
+		
+		userProcessor.process(location);
+		
+		
+		
 
 	}
+	
+	@RequestMapping(value = "/android/notify/nearest/volunteer", method = RequestMethod.POST)
+	public void registerToEvent(@RequestBody Event event) {
+	
+		notificationProcessor.process(event);
+		
+	}
+	
+	
+	
+	
 
 	@RequestMapping(value = "/android/receive/userlocation", method = RequestMethod.GET)
-	public Flux<User> getUserLocation() {
+	public Flux<UserLocation> getUserLocation() {
 		return Flux.create(sink -> {
 			userProcessor.register(sink::next);
+		});
+
+	}
+	
+	
+	@RequestMapping(value = "/android/receive/nearest/volunteer", method = RequestMethod.GET)
+	public Flux<Event> getEventVolunteers() {
+		return Flux.create(sink -> {
+			notificationProcessor.register(sink::next);
 		});
 
 	}

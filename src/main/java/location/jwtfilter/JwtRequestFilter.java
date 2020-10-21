@@ -46,19 +46,19 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwt = null;
         
-        System.out.println("Printing Request");
+       // System.out.println("Printing Request");
         
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while(headerNames.hasMoreElements()) {
-          String headerName = headerNames.nextElement();
-          System.out.println("Header Name - " + headerName + ", Value - " + request.getHeader(headerName));
-        }
-        
-        Enumeration<String> params = request.getParameterNames(); 
-        while(params.hasMoreElements()){
-         String paramName = params.nextElement();
-         System.out.println("Parameter Name - "+paramName+", Value - "+request.getParameter(paramName));
-        }
+//        Enumeration<String> headerNames = request.getHeaderNames();
+//        while(headerNames.hasMoreElements()) {
+//          String headerName = headerNames.nextElement();
+//          System.out.println("Header Name - " + headerName + ", Value - " + request.getHeader(headerName));
+//        }
+//        
+//        Enumeration<String> params = request.getParameterNames(); 
+//        while(params.hasMoreElements()){
+//         String paramName = params.nextElement();
+//         System.out.println("Parameter Name - "+paramName+", Value - "+request.getParameter(paramName));
+//        }
         
         
        
@@ -74,7 +74,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             } catch (SignatureException e) {
               //  Logger.getLogger(JWTController.class.getName()).log(Level.ERROR, e);
             } catch(Exception e){
-                System.out.println(" Some other exception in JWT parsing ");
+              //  System.out.println(" Some other exception in JWT parsing ");
             }
         }
 

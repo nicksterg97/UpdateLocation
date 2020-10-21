@@ -78,27 +78,14 @@ public class RestApiController {
 
 		// User from user_id
 		User user = userFromRepo.get();
-		
-		userRepo.saveAndFlush(user);
-		
+		userRepo.saveAndFlush(user);	
 		userProcessor.process(location);
 		
-		
-		
-
 	}
 	
-	@RequestMapping(value = "/android/notify/nearest/volunteer", method = RequestMethod.POST)
-	public void registerToEvent(@RequestBody Event event) {
-	
-		notificationProcessor.process(event);
-		
-	}
-	
-	
-	
-	
 
+	
+	
 	@RequestMapping(value = "/android/receive/userlocation", method = RequestMethod.GET)
 	public Flux<UserLocation> getUserLocation() {
 		return Flux.create(sink -> {
@@ -108,12 +95,5 @@ public class RestApiController {
 	}
 	
 	
-	@RequestMapping(value = "/android/receive/nearest/volunteer", method = RequestMethod.GET)
-	public Flux<Event> getEventVolunteers() {
-		return Flux.create(sink -> {
-			notificationProcessor.register(sink::next);
-		});
-
-	}
 
 }

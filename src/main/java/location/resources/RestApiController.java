@@ -73,14 +73,14 @@ public class RestApiController {
 		Optional<User> userFromRepo = userRepo.findByUserName(location.getUsername());
 
 		// Posted Data
-		String lat = location.getLatString();
-		String lonString = location.getLonString();
+		Double lat = location.getLat();
+		Double lonString = location.getLon();
 
 		// User from user_id
 		User user = userFromRepo.get();
 		
-		user.setLat(Double.parseDouble(lat));
-		user.setLon(Double.parseDouble(lonString));
+		user.setLat(lat);
+		user.setLon(lonString);
 		
 		
 		userRepo.saveAndFlush(user);	

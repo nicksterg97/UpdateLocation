@@ -1,20 +1,23 @@
 package location.entities;
 
 public class UserLocation {
-String lat;
-String lon;
+Double lat;
+Double lon;
 String username;
-public String getLatString() {
+
+
+
+public Double getLat() {
 	return lat;
 }
-public void setLatString(String latString) {
-	this.lat = latString;
+public void setLat(Double lat) {
+	this.lat = lat;
 }
-public String getLonString() {
+public Double getLon() {
 	return lon;
 }
-public void setLonString(String lonString) {
-	this.lon = lonString;
+public void setLon(Double lon) {
+	this.lon = lon;
 }
 public String getUsername() {
 	return username;

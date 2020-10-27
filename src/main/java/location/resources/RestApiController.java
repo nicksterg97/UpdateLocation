@@ -70,7 +70,7 @@ public class RestApiController {
 
 	@RequestMapping(value = "/android/update/userlocation", method = RequestMethod.POST)
 	public void updateUserLocation(@RequestBody UserLocation location) {
-		Optional<User> userFromRepo = userRepo.findById(location.getUser_id());
+		Optional<User> userFromRepo = userRepo.findByUserName(location.getUsername());
 
 		// Posted Data
 		String lat = location.getLatString();
@@ -78,6 +78,11 @@ public class RestApiController {
 
 		// User from user_id
 		User user = userFromRepo.get();
+		
+		user.setLat(Double.parseDouble(lat));
+		user.setLon(Double.parseDouble(lonString));
+		
+		
 		userRepo.saveAndFlush(user);	
 		userProcessor.process(location);
 		

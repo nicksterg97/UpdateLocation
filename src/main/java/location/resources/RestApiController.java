@@ -69,7 +69,7 @@ public class RestApiController {
 	}
 
 	@RequestMapping(value = "/android/update/userlocation", method = RequestMethod.POST)
-	public void updateUserLocation(@RequestBody UserLocation location) {
+	public HttpStatus updateUserLocation(@RequestBody UserLocation location) {
 		Optional<User> userFromRepo = userRepo.findByUserName(location.getUsername());
 
 		// Posted Data
@@ -85,6 +85,8 @@ public class RestApiController {
 		
 		userRepo.saveAndFlush(user);	
 		userProcessor.process(location);
+	
+		return HttpStatus.OK;
 		
 	}
 	

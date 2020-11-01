@@ -27,6 +27,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.web.filter.GenericFilterBean;
 
+
 import location.jwtfilter.JwtRequestFilter;
 
 @EnableWebSecurity
@@ -40,7 +41,7 @@ public class MultipleSecurity {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(myUserDetailsService);
+		auth.userDetailsService(myUserDetailsService).passwordEncoder(new CustomPasswordEncoder());
 	}
 
 	@Bean

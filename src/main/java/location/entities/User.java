@@ -1,5 +1,5 @@
-package location.entities;
-
+ package location.entities;
+ 
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -104,22 +106,34 @@ public class User {
 	@Column(name="lon")
 	private Double lon;
 	
-	
-	
 	@Column(name="age")
-	private String age;
+	private int age;
 	
 	@Column(name="gender")
 	private String gender;
 	
-	
-	@Column(name="clinic")
-	private String clinic;
+	@ManyToOne
+	@JoinColumn(name = "hospital_id")
+	private Hospital hospital;
 	
 	@Column(name="cluster_municipality")
 	private String clusterMunicipality;
 	
+	@Column(name="date_of_birth")
+	private String dateOfBirth;
 	
+	
+	
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+
 
 	public User() {
 		super();
@@ -151,14 +165,14 @@ public class User {
 
 
 
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
 
 
 
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
@@ -283,12 +297,11 @@ public class User {
 		this.userName = userName;
 	}
 
-	//ok
 
 
 	public User(int user_id, String name, String surname, String email, String password, String city, String phone,
 			String roles, String userName, Integer isActive, String registrationDate, String firebaseToken,
-			String bloodType, String disease, String alergies, String medicines, int counterContacts,int counterIncidents, int counterDirections,String country,String photo,String phoneNumber,String periphery,String age,String gender,String municipality,String department,String clinic ) {
+			String bloodType, String disease, String alergies, String medicines, int counterContacts,int counterIncidents, int counterDirections,String country,String photo,String phoneNumber,String periphery,int age,String gender,String municipality,String department,String dateOfBirth,Hospital hospital ) {
 		super();
 		this.user_id = user_id;
 		this.name = name;
@@ -317,14 +330,16 @@ public class User {
 		this.gender=gender;
 		this.municipality=municipality;
 		this.department=department;
-		this.clinic=clinic;
+		this.dateOfBirth=dateOfBirth;
+		this.hospital=hospital;
 	}
 	
 	
 	
 
-	public String getClinic() {
-		return clinic;
+
+	public Hospital getHospital() {
+		return hospital;
 	}
 
 
@@ -333,8 +348,8 @@ public class User {
 
 
 
-	public void setClinic(String clinic) {
-		this.clinic = clinic;
+	public void setHospital(Hospital hospitalFk) {
+		this.hospital = hospitalFk;
 	}
 
 
